@@ -5,6 +5,7 @@ import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  lang: 'zh-cn',
   title: "程序员阿丙的客厅",
   description: "A VitePress Site",
   themeConfig: {
@@ -28,7 +29,7 @@ export default defineConfig({
       level: [1, 6]
     }
   },
-  lang: 'zh-cn',
+
   vite:{
     plugins: [pagefindPlugin({
       customSearchQuery: chineseSearchOptimize,
