@@ -330,7 +330,7 @@ Ollama is running
 上面通过命令行和裸API使用deepseek的方式太麻烦了，我们可以使用AI客户端。当前这个领域正处于蓬勃发展中，不断有新的产品涌现出来，比如page assist、、RAGFlow、FastGPT、Dify.ai、AnythingLLM、cherry studio、chatbox、MaxKB、Open WebUI等等。由于只是在macbook上体验一下，为了简单方便，我这里使用page assist。
 
 page assist是一个chrome插件，所以直接从chrome应用商店添加即可。
-![page-assist-install]((/images/ai/page-assist-install.png))
+![page-assist-install](/images/ai/page-assist-install.png)
 添加后，打开page assist插件，根据自己的需要进行一些配置：
 
 点击右上侧的`配置`图标
