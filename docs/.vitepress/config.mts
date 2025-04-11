@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { nav } from './navbar';
 import { sidebar } from './sidebar';
-import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+import { chineseSearchOptimize, pagefindPlugin } from 'vitepress-plugin-pagefind'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -28,7 +28,15 @@ export default defineConfig({
       level: [1, 6]
     }
   },
+  lang: 'zh-cn',
   vite:{
-    plugins:[pagefindPlugin()],
+    plugins: [pagefindPlugin({
+      customSearchQuery: chineseSearchOptimize,
+      btnPlaceholder: '搜索',
+      placeholder: '搜索文档',
+      emptyText: '空空如也',
+      heading: '共: {{searchResult}} 条结果',
+      excludeSelector: ['img', 'a.header-anchor'],
+    })],
   }
 })
