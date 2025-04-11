@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "medium-zoom": "^1.1.0",
+    "pagefind": "^1.3.0",
     "vitepress-plugin-pagefind": "^0.4.13"
   }
 }
