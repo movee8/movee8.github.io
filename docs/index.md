@@ -6,6 +6,9 @@ hero:
   name: "朋友，你好！"
   text: ""
   tagline: 请坐下，我们聊聊技术与生活
+  #image:
+  #  src: /home.jpg
+  #  alt: VitePress
   actions:
     - theme: brand
       text: AI文集

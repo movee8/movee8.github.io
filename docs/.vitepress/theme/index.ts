@@ -2,7 +2,8 @@ import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch, nextTick, h } from 'vue'
 import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
-import GiscusComment from './components/GiscusComment.vue';
+// @ts-ignore
+import GiscusComment from './components/GiscusComment.vue'
 
 import './index.css'
 
