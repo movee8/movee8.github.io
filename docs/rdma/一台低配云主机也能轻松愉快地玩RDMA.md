@@ -1,8 +1,10 @@
 近年来，随着AI技术的持续、迅猛高速发展，其底层依赖的GPU集群等高性能计算、存储系统也相应得到了同步的发展，随之也发现系统节点间的高性能通信效率成为制约系统发展的核心瓶颈之一。RDMA技术作为当前在高带宽和低时延通信方面表现最为突出的技术之一也备受人瞩目。RDMA对传统通信技术的一个核心优化点就是将通信协议栈的实现由软件、操作系统层面offload到了硬件层面。这样建设一个RDMA网络环境首先需要有RDMA网卡，于是我跑到淘宝、亚马逊上看了一眼：
-
+![mellanox-price1](/images/rdma/mellanox-price1.webp)
+![mellanox-price2](/images/rdma/mellanox-price2.webp)
 然后我摸了摸自己的口袋，果断被劝退。
 
 不过，我们看看RDMA的网络协议栈架构
+![rdma-software-arch](/images/rdma/rdma-software-arch.webp)
 
 可以发现RDMA的一个主流实现`RoCEv2`，它将`IP/UDP/IB transport protocol`协议栈实现从软件层面移到了网卡中，如果把`IP/UDP/IB transport protocol`协议栈重新移到软件层面实现，那么普通的以太网卡不就能支持RDMA网络通信了吗？这样虽然RDMA的性能会打点折扣，但是大大方便了RDMA网络应用的开发测试环境部署搭建、测试、故障定位和学习，而且即使部署到生产环境中，比较传统的网络内核socket通信方式，仍然带来零拷贝、内核协议栈bypass等技术性能优势。熟悉高性能网络开发的朋友们也都知道，零拷贝、内核协议栈bypass也是针对内核socket通信方式进行性能优化的核心优化手段之一。事实上，由`IBM`和`Mellanox`牵头的`IBTA` `RoCE`工作组已经实现了纯软件版的`RoCE`，我们一般叫它`SoftRoCE`。我们在常用的RoCE开发套件中，就能使用SoftRoCE。
 

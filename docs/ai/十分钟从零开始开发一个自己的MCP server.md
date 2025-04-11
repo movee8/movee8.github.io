@@ -1,4 +1,4 @@
-本来计划一篇文章介绍完如何开发一个自己的MCP server，写完 后，发现虽然很多内容没有介绍，篇幅还是比较长的，所以分成两篇来介绍。这一篇通过一个写文件功能的例子来介绍如何开发一个具体的MCP server
+本来计划一篇文章介绍完如何开发一个自己的MCP server，写完[一文读懂MCP协议](一文读懂MCP协议.md) 后，发现虽然很多内容没有介绍，篇幅还是比较长的，所以分成两篇来介绍。这一篇通过一个写文件功能的例子来介绍如何开发一个具体的MCP server
 
 ### 1 MCPServer设计与实现
 
@@ -313,6 +313,8 @@ hello mcp
 #### 2.1 配置添加MCP Server
 
 在`Claude Desktop`的`Setting`中点击`Developer`，然后点击`Edit Config`。
+![claude-settings](/images/ai/claude-settings.png)
+![claude-edit-config](/images/ai/claude-edit-config.png)
 
 然后在配置文件中添加一下配置（如果是Macbook，也可以直接编辑配置文件`~/Library/Application\ Support/Claude/claude_desktop_config.json`）。配置中的`cammand`就是我们编译的二进制文件的绝对路径（不要填相对路径），`args`是命令的参数。Claude Desktop在启动时会执行这个命令，从而启动相应的MCP server。
 
@@ -332,8 +334,10 @@ hello mcp
 #### 2.2 使用MCP Server
 
 添加完MCP Server配置后，重新启动Claude Desktop，可以发现在对话框的右下角多了一个锤子的图标，并显示了加载的MCP Server的数量，点击这个图标，可以查看MCP Server注册的name、version、功能描述等信息
+![claude-load-mcp](/images/ai/claude-load-mcp.png)
 
 我们向Claude发送一个写文件的指令，可以发现Claude Desktop成功执行了指令。
+![claude-command](/images/ai/claude-command.png)
 
 我们在相应的文件目录，可以发现创建了一个`test1.txt`文件，文件内容就是我们要求Claude写入的内容。我们再打开日志文件，可以查看Claude与我们的MCP Server的详细交互过程。
 

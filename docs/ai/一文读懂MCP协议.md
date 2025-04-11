@@ -1,14 +1,18 @@
-### 1 MCP为什么这么受欢迎
+
+
+# 1 MCP为什么这么受欢迎
 
 自从chatGPT发布以后，大家探索和应用大语言模型（`LLM`）的热情不断高涨，不同行业、不同应用领域都在积极尝试使用大语言模型的能力解决各自的问题，取得了惊人的效果。当前，大语言模型最基础的使用方式，就是像chatGPT那样，我们向它提问，然后它给我们一个答案。这个答案，可能是提供一些信息知识，生成sql查询语句，生成一段代码，制定一个行动计划等等。然后我们使用模型提供的sql语句去查询数据库，将代码集成到自己的项目中编译执行。于是，自然而然地，我们就可以想到让大语言模型应用程序自己用大语言模型生成的sql语句去查询数据库，自动编译执行模型生成的的代码，这样就形成一个自动闭环，无需人的参与（或许有的场景需要人的监督和决策，然后人工触发自动执行，但也只需要下发一个执行的指令即可）。初始的时候，大家提供一个函数接口（function call），让大语言模型应用程序在满足条件时自动调用。但是，不同的功能、不同的厂商各自独立定义自己的函数接口，这样函数接口的形式五花八门，不便于应用程序的集成，非常不利于大模型应用生态的发展。anthropic公司为大模型应用生态各组件的交互设计并实践了一个`MCP`（`Model Contex Protocol`）协议，规定了大模型应用组件间通信的通信机制、消息格式等，现在把它开源出来，获得了大家的一致认同。可以预见到，MCP协议可能会大大地促进大模型应用生态的发展和繁荣。这一现象在历史上屡见不鲜，如硬件领域的USB协议、PCIE协议，软件领域的TCP/IP协议等等。
 
-### &#x20;2 MCP的架构和组件间交互机制
+# 2 MCP的架构和组件间交互机制
 
 站在通信的角度，MCP将大模型生态各组件抽象为三个主要角色：`MCP hosts`、`MCP client`、`MCP server`。MCP官网说明MCP架构时，除了上述三大角色，还列出了`Local Data Source`和`Remote Service`两个角色，但这两个角色主要是详细说明MCP server支持的核心功能，不影响对MCP协议本身的理解，本文不做过多说明。同时，MCP官网将大模型与MCP host当做一个整体，没有进行区分。但是，考虑到MCP host与大模型往往是不同的独立实体，host与大模型间需要通过通信进行交互，且一个host可以连接多个大模型，为了描述方便，我将大模型独立出来作为一个单独的角色进行描述。
 
 MCP官网给出的MCP架构图：
+![mcp-arch](/images/ai/mcp-arch.png)
 
 我梳理了一下MCP主要角色的交互机制序列图如下：
+![mcp-sequence](/images/ai/mcp-sequence.png)
 
 主要角色说明：
 
@@ -70,7 +74,7 @@ MCP典型的工作过程如下：
 
 12. Host可能会使用Client的返回结果继续请求LLM，循环上面的步骤直到最终解决用户的需求，或者让LLM整理一下Client的返回结果，转换为自然语言的表达方式返回给用户。
 
-### &#x20;3 MCP协议的消息格式
+# 3 MCP协议的消息格式
 
 MCP Client和Server之间的通信消息使用`JSON-RPC 2.0`编码，这样我们知道：1）MCP消息都是JSON格式的；2）当Client或Server需要向对方描述功能和参数时（例如Initialize阶段），使用`JSON-RPC 2.0`语法来描述参数的名称和类型。
 
@@ -122,7 +126,7 @@ MCP协议包括三者类型的消息：
 
     可见Notification与Request的格式差不多，只是Notification由于不需要对方响应，所有没有id字段
 
-### 4 MCP的消息传递方式
+# 4 MCP的消息传递方式
 
 上面描述了MCP消息的格式，但是Client需要一种具体通信手段将消息传递给Server。目前MCP官方定义了两种具体的方法：
 
@@ -136,11 +140,11 @@ MCP协议包括三者类型的消息：
 
     其实其它的通信协议也都可以使用，如http、websocket，只要MCP生态中大家都支持，就可以方便的使用
 
-### &#x20;5 MCP消息内容举例
+# 5 MCP消息内容举例
 
 上面描述了MCP消息的格式定义，可能还是有些抽象，下面举几个常用消息的例子，感受一下
 
-#### &#x20;5.1 initialize请求消息
+## 5.1 initialize请求消息
 
 下面是Claude Desktop MCP Client发送的Initialize请求消息例子
 
@@ -160,7 +164,7 @@ MCP协议包括三者类型的消息：
 }
 ```
 
-#### 5.2 Initialize响应消息
+## 5.2 Initialize响应消息
 
 Server在Initialize响应消息的result字段中提供了Server的基本信息和支持的能力
 
@@ -187,7 +191,7 @@ Server在Initialize响应消息的result字段中提供了Server的基本信息�
 }
 ```
 
-#### &#x20;5.3 initialize notification消息
+## 5.3 initialize notification消息
 
 下面的initialize notification消息也是Claude Desktop在Initialize阶段发送给Server端的
 
@@ -199,7 +203,7 @@ Server在Initialize响应消息的result字段中提供了Server的基本信息�
 }
 ```
 
-#### 5.4 tools/list请求消息
+## 5.4 tools/list请求消息
 
 ```json
 {
@@ -209,7 +213,7 @@ Server在Initialize响应消息的result字段中提供了Server的基本信息�
 }
 ```
 
-#### 5.5 tools/list响应消息
+## 5.5 tools/list响应消息
 
 这个消息表明这个Server提供了一个名字叫做write\_file的tool功能，它需要提供两个参数：文件的路径和写入文件的内容，这两个参数的类型都是字符串。tool的功能和参数的含义都通过description字段进行了准确描述
 
@@ -244,7 +248,7 @@ Server在Initialize响应消息的result字段中提供了Server的基本信息�
 }
 ```
 
-#### 5.6 tools/call请求消息
+## 5.6 tools/call请求消息
 
 通过tools/list获取了Server提供的tools，LLM就可以根据tool的功能决定是否需要调用，根据参数定义提供具体的参数。下面是Claude模型提供的调用参数，并由Claude Desktop的Client发送给mcp-fs-server Server端的tools/call请求调用消息
 
@@ -263,7 +267,7 @@ Server在Initialize响应消息的result字段中提供了Server的基本信息�
 }
 ```
 
-#### 5.7 tools/call响应消息
+## 5.7 tools/call响应消息
 
 mcp-fs-server Server处理请求后的响应消息
 

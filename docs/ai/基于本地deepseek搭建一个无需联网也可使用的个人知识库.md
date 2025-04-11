@@ -20,9 +20,12 @@
 | 典型用途  | 写代码、翻译、文案生成等个人任务                              | 构建智能客服、批量文档处理、AI 赋能业务系统             |
 
 我们去 [ollama官网下载页](https://ollama.com/download) 即能下载ollama。
+![ollama-download](/images/ai/ollama-download.png)
 
 下载安装后，我们可以打开ollama，继续安装 ollama命令，这样就能在shell终端工具中使用ollama了。
-
+![ollama-install](/images/ai/ollama-install.png)
+最后点击`Finish`，完成ollam命令的安装和启动
+![ollama-install-finish](/images/ai/ollama-install-finish.png)
 我们先看看ollama命令提供的功能
 
 ```bash
@@ -62,6 +65,7 @@ ollama version is 0.6.0
 在 [ollama官网模型页面](https://ollama.com/search) 我们可以看到ollama支持的所有LLM模型，进入 [deepseek-r1页面](https://ollama.com/library/deepseek-r1) 可以查看deepseek-r1的详细信息。deepseek-r1有参数规模不同的多个版本，随着参数规模的增长，模型性能也随着增长，对部署机器的要求也更高。
 
 不同版本的性能对比如下：
+![deepseek-evalue](/images/ai/deepseek-evalue.png)
 
 不同版本对硬件的要求如下：
 
@@ -79,7 +83,7 @@ ollama version is 0.6.0
 
 用一个命令即可安装deepseek
 
-```bansh
+```bash
 % ollama pull deepseek-r1:8B
 pulling manifest
 pulling 6340dc3229b0... 100%  4.9 GB
@@ -325,10 +329,24 @@ Ollama is running
 
 上面通过命令行和裸API使用deepseek的方式太麻烦了，我们可以使用AI客户端。当前这个领域正处于蓬勃发展中，不断有新的产品涌现出来，比如page assist、、RAGFlow、FastGPT、Dify.ai、AnythingLLM、cherry studio、chatbox、MaxKB、Open WebUI等等。由于只是在macbook上体验一下，为了简单方便，我这里使用page assist。
 
-page assist是一个chrome插件，所以直接从chrome应用商店添加即可。添加后，打开page assist插件，根据自己的需要进行一些配置：
+page assist是一个chrome插件，所以直接从chrome应用商店添加即可。
+![page-assist-install]((/images/ai/page-assist-install.png))
+添加后，打开page assist插件，根据自己的需要进行一些配置：
 
+点击右上侧的`配置`图标
+![ollama-assist-config](/images/ai/ollama-assist-config.jpg)
+配置语言和搜索引擎
+![ollama-assist-config-base](/images/ai/ollama-assist-config-base.jpg)
+![ollama-assist-config-search](/images/ai/ollama-assist-config-search.jpg)
+RAG的文本输入模型选择deepseek-r1:8B
+![ollama-assist-config-rag](/images/ai/ollama-assist-config-rag.jpg)
+配置ollama的API地址
+![ollama-assist-config-ollama](/images/ai/ollama-assist-config-ollama.jpg)
 然后就可以对话了。
+![page-assist-example](/images/ai/page-assist-example.png)
 
-也可以添加本地文档，维护一个本地知识库，然后就可以通过deepseek使用本地知识库。
+也可以添加本地文档，维护一个本地知识库，然后就可以通过deepseek使用本地知识库。 添加本地文档
+![ollama-assist-config-knowledge](/images/ai/ollama-assist-config-knowledge.jpg)
 
-添加本地文档
+然后就可以对自己的本地文档进行提问了：
+![ollama-assist-use](/images/ai/ollama-assist-use.jpg)
