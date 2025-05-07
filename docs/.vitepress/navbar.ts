@@ -13,7 +13,11 @@ export const nav: DefaultTheme.NavItem[] = [
             },
             {
                 text: 'rdma文集',
-                link: '/rdma/一台低配云主机也能轻松愉快地玩RDMA' // 表示docs/column/Growing/index.md
+                link: '/rdma/一台低配云主机也能轻松愉快地玩RDMA' 
+            },
+            {
+                text: '高性能编程开发文集',
+                link: '/perf-program/高性能编程开发（一）：HugePage' 
             }
         ]
     },

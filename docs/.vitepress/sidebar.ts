@@ -18,5 +18,16 @@ export const sidebar = {
         { text: '一台低配云主机也能轻松愉快地玩RDMA', link: '/rdma/一台低配云主机也能轻松愉快地玩RDMA' },
       ]
     }
+  ],
+  'perf-program': [
+    {
+      text: '高性能编程开发',
+      collapsed: false,
+      items: [
+        { text: '高性能编程开发（一）：HugePage', link: '/perf-program/高性能编程开发（一）：HugePage' },
+        { text: '高性能编程开发（二）：NUMA', link: '/perf-program/高性能编程开发（二）：NUMA' },
+        { text: '高性能编程开发（三）：CPU亲和性和绑核', link: '/perf-program/高性能编程开发（三）：CPU亲和性和绑核' },
+      ]
+    }
   ]
 }
